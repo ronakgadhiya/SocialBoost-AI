@@ -137,7 +137,7 @@ export function HistoryPage({ onShowToast, onNavigateGenerator }: HistoryPagePro
               placeholder="Search by keywords, hook, or business..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 rounded-xl text-xs sm:text-sm border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full pl-9 pr-4 py-2 rounded-xl text-xs sm:text-sm border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
             />
           </div>
 
@@ -147,10 +147,10 @@ export function HistoryPage({ onShowToast, onNavigateGenerator }: HistoryPagePro
               id="history-platform-filter"
               value={filterPlatform}
               onChange={(e) => setFilterPlatform(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl text-xs font-medium border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl text-xs font-medium border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
             >
               {platformsList.map((p) => (
-                <option key={p} value={p}>
+                <option key={p} value={p} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">
                   Platform: {p}
                 </option>
               ))}
@@ -163,10 +163,10 @@ export function HistoryPage({ onShowToast, onNavigateGenerator }: HistoryPagePro
               id="history-type-filter"
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl text-xs font-medium border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl text-xs font-medium border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
             >
               {typesList.map((t) => (
-                <option key={t} value={t}>
+                <option key={t} value={t} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">
                   Type: {t}
                 </option>
               ))}
@@ -324,11 +324,12 @@ export function HistoryPage({ onShowToast, onNavigateGenerator }: HistoryPagePro
               </div>
             )}
 
-            <div className="space-y-1">
-              <span className="font-bold uppercase text-[10px] text-slate-400 block">
+            <div className="space-y-1.5">
+              <span className="font-bold uppercase text-xs text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
+                <FileText className="w-3.5 h-3.5" />
                 MAIN CONTENT / CAPTION
               </span>
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 whitespace-pre-wrap leading-relaxed text-slate-800 dark:text-slate-200">
+              <div className="p-4 rounded-xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200/80 dark:border-blue-900/60 whitespace-pre-wrap leading-relaxed text-blue-950 dark:text-blue-50 font-medium">
                 {selectedItem.content}
               </div>
             </div>

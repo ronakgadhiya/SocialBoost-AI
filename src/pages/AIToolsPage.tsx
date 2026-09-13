@@ -18,11 +18,88 @@ import {
   Megaphone,
   UserCheck,
   RefreshCw,
+  Palette,
 } from 'lucide-react';
 import { AIToolType, AIToolResult, BusinessProfile, Platform, Tone, Language } from '../types';
 import { generateAIToolOutput } from '../services/geminiService';
 import { copyToClipboard } from '../utils/export';
 import { addHistoryItem } from '../utils/storage';
+
+export type ToolColorTheme = 'indigo' | 'blue' | 'emerald' | 'purple' | 'amber' | 'slate';
+
+interface ToolThemeConfig {
+  id: ToolColorTheme;
+  name: string;
+  dotBg: string;
+  itemBg: string;
+  badgeBg: string;
+  badgeText: string;
+  hoverBorder: string;
+  textColor: string;
+}
+
+export const TOOL_THEMES: Record<ToolColorTheme, ToolThemeConfig> = {
+  indigo: {
+    id: 'indigo',
+    name: 'Royal Indigo',
+    dotBg: 'bg-indigo-600',
+    itemBg: 'bg-indigo-50/70 dark:bg-indigo-950/40 border-indigo-200 dark:border-indigo-800/80',
+    badgeBg: 'bg-indigo-200/70 dark:bg-indigo-900/90 text-indigo-800 dark:text-indigo-200',
+    badgeText: 'text-indigo-600 dark:text-indigo-400',
+    hoverBorder: 'hover:border-indigo-400 dark:hover:border-indigo-600',
+    textColor: 'text-slate-900 dark:text-slate-100',
+  },
+  blue: {
+    id: 'blue',
+    name: 'Ocean Blue',
+    dotBg: 'bg-blue-600',
+    itemBg: 'bg-blue-50/70 dark:bg-blue-950/40 border-blue-200 dark:border-blue-800/80',
+    badgeBg: 'bg-blue-200/70 dark:bg-blue-900/90 text-blue-800 dark:text-blue-200',
+    badgeText: 'text-blue-600 dark:text-blue-400',
+    hoverBorder: 'hover:border-blue-400 dark:hover:border-blue-600',
+    textColor: 'text-slate-900 dark:text-slate-100',
+  },
+  emerald: {
+    id: 'emerald',
+    name: 'Fresh Emerald',
+    dotBg: 'bg-emerald-600',
+    itemBg: 'bg-emerald-50/70 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800/80',
+    badgeBg: 'bg-emerald-200/70 dark:bg-emerald-900/90 text-emerald-800 dark:text-emerald-200',
+    badgeText: 'text-emerald-600 dark:text-emerald-400',
+    hoverBorder: 'hover:border-emerald-400 dark:hover:border-emerald-600',
+    textColor: 'text-slate-900 dark:text-slate-100',
+  },
+  purple: {
+    id: 'purple',
+    name: 'Vibrant Purple',
+    dotBg: 'bg-purple-600',
+    itemBg: 'bg-purple-50/70 dark:bg-purple-950/40 border-purple-200 dark:border-purple-800/80',
+    badgeBg: 'bg-purple-200/70 dark:bg-purple-900/90 text-purple-800 dark:text-purple-200',
+    badgeText: 'text-purple-600 dark:text-purple-400',
+    hoverBorder: 'hover:border-purple-400 dark:hover:border-purple-600',
+    textColor: 'text-slate-900 dark:text-slate-100',
+  },
+  amber: {
+    id: 'amber',
+    name: 'Sunset Amber',
+    dotBg: 'bg-amber-600',
+    itemBg: 'bg-amber-50/70 dark:bg-amber-950/40 border-amber-200 dark:border-amber-800/80',
+    badgeBg: 'bg-amber-200/70 dark:bg-amber-900/90 text-amber-800 dark:text-amber-200',
+    badgeText: 'text-amber-600 dark:text-amber-400',
+    hoverBorder: 'hover:border-amber-400 dark:hover:border-amber-600',
+    textColor: 'text-slate-900 dark:text-slate-100',
+  },
+  slate: {
+    id: 'slate',
+    name: 'Slate Classic',
+    dotBg: 'bg-slate-600',
+    itemBg: 'bg-slate-100 dark:bg-slate-800/90 border-slate-300 dark:border-slate-700',
+    badgeBg: 'bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200',
+    badgeText: 'text-slate-700 dark:text-slate-300',
+    hoverBorder: 'hover:border-slate-400 dark:hover:border-slate-500',
+    textColor: 'text-slate-900 dark:text-slate-100',
+  },
+};
 
 interface AIToolsPageProps {
   brandProfile: BusinessProfile | null;
@@ -155,6 +232,15 @@ export function AIToolsPage({
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<AIToolResult | null>(null);
   const [copied, setCopied] = useState(false);
+  const [resultTheme, setResultTheme] = useState<ToolColorTheme>(() => {
+    const saved = localStorage.getItem('sb_ai_tools_color') as ToolColorTheme;
+    return saved && TOOL_THEMES[saved] ? saved : 'indigo';
+  });
+
+  const handleSelectTheme = (t: ToolColorTheme) => {
+    setResultTheme(t);
+    localStorage.setItem('sb_ai_tools_color', t);
+  };
 
   useEffect(() => {
     if (brandProfile) {
@@ -318,7 +404,7 @@ export function AIToolsPage({
               value={businessName}
               onChange={(e) => setBusinessName(e.target.value)}
               placeholder="e.g. Roviq Design Store"
-              className="w-full px-3 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             />
           </div>
 
@@ -332,7 +418,7 @@ export function AIToolsPage({
               value={productService}
               onChange={(e) => setProductService(e.target.value)}
               placeholder="e.g. Premium Oversized Graphic T-Shirts"
-              className="w-full px-3 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             />
           </div>
 
@@ -346,7 +432,7 @@ export function AIToolsPage({
               value={targetAudience}
               onChange={(e) => setTargetAudience(e.target.value)}
               placeholder="e.g. College students, young creators"
-              className="w-full px-3 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             />
           </div>
 
@@ -360,7 +446,7 @@ export function AIToolsPage({
               value={context}
               onChange={(e) => setContext(e.target.value)}
               placeholder={selectedTool.contextPlaceholder || 'Optional guidelines or details...'}
-              className="w-full px-3 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             />
           </div>
 
@@ -373,14 +459,14 @@ export function AIToolsPage({
                 id="tool-tone-select"
                 value={tone}
                 onChange={(e) => setTone(e.target.value)}
-                className="w-full px-2.5 py-1.5 rounded-lg text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
+                className="w-full px-2.5 py-1.5 rounded-lg text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
               >
-                <option value="Friendly">Friendly</option>
-                <option value="Professional">Professional</option>
-                <option value="Bold">Bold</option>
-                <option value="Inspirational">Inspirational</option>
-                <option value="Casual">Casual</option>
-                <option value="Gen Z">Gen Z</option>
+                <option value="Friendly" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">Friendly</option>
+                <option value="Professional" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">Professional</option>
+                <option value="Bold" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">Bold</option>
+                <option value="Inspirational" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">Inspirational</option>
+                <option value="Casual" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">Casual</option>
+                <option value="Gen Z" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">Gen Z</option>
               </select>
             </div>
 
@@ -392,14 +478,14 @@ export function AIToolsPage({
                 id="tool-language-select"
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
-                className="w-full px-2.5 py-1.5 rounded-lg text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
+                className="w-full px-2.5 py-1.5 rounded-lg text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
               >
-                <option value="English">English</option>
-                <option value="Hindi">Hindi</option>
-                <option value="Gujarati">Gujarati</option>
-                <option value="Hinglish">Hinglish</option>
-                <option value="Hindi + English">Hindi + English</option>
-                <option value="Gujarati + English">Gujarati + English</option>
+                <option value="English" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">English</option>
+                <option value="Hindi" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">Hindi</option>
+                <option value="Gujarati" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">Gujarati</option>
+                <option value="Hinglish" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">Hinglish</option>
+                <option value="Hindi + English" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">Hindi + English</option>
+                <option value="Gujarati + English" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">Gujarati + English</option>
               </select>
             </div>
           </div>
@@ -438,17 +524,40 @@ export function AIToolsPage({
               </div>
             ) : result ? (
               <div className="space-y-4">
-                {/* Result Header */}
-                <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
-                  <div>
+                {/* Result Header & Palette Switcher */}
+                <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <div className="space-y-0.5">
                     <h4 className="text-sm font-bold text-slate-900 dark:text-white">{result.title}</h4>
                     <span className="text-[11px] text-slate-400">Generated with Gemini AI</span>
                   </div>
+
                   <div className="flex items-center gap-2">
+                    {/* Interactive Color Changer */}
+                    <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs">
+                      <Palette className="w-3 h-3 text-slate-400 mr-0.5" />
+                      {(Object.keys(TOOL_THEMES) as ToolColorTheme[]).map((themeKey) => {
+                        const th = TOOL_THEMES[themeKey];
+                        const isSelected = resultTheme === themeKey;
+                        return (
+                          <button
+                            key={themeKey}
+                            type="button"
+                            onClick={() => handleSelectTheme(themeKey)}
+                            title={`Switch color to ${th.name}`}
+                            className={`w-3.5 h-3.5 rounded-full ${th.dotBg} transition-all cursor-pointer ${
+                              isSelected
+                                ? 'ring-2 ring-indigo-500 scale-125 shadow-xs'
+                                : 'opacity-60 hover:opacity-100 hover:scale-110'
+                            }`}
+                          />
+                        );
+                      })}
+                    </div>
+
                     <button
                       id="tool-copy-btn"
                       onClick={handleCopyResult}
-                      className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-semibold flex items-center gap-1"
+                      className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-semibold flex items-center gap-1 cursor-pointer transition-colors"
                     >
                       {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
                       <span>{copied ? 'Copied' : 'Copy'}</span>
@@ -456,7 +565,7 @@ export function AIToolsPage({
                     <button
                       id="tool-save-btn"
                       onClick={handleSaveToHistory}
-                      className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-semibold flex items-center gap-1"
+                      className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-semibold flex items-center gap-1 cursor-pointer transition-colors"
                     >
                       <Bookmark className="w-3.5 h-3.5" />
                       <span>Save</span>
@@ -465,37 +574,46 @@ export function AIToolsPage({
                 </div>
 
                 {/* List or Content Output */}
-                {result.items && result.items.length > 0 ? (
-                  <div className="space-y-2 max-h-[500px] overflow-y-auto pr-1">
-                    {result.items.map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="p-3 rounded-xl bg-slate-50 dark:bg-slate-850/60 border border-slate-100 dark:border-slate-800/80 text-xs text-slate-800 dark:text-slate-200 flex items-start justify-between gap-3 group hover:border-indigo-200 dark:hover:border-indigo-900 transition-colors"
-                      >
-                        <div className="flex items-start gap-2.5">
-                          <span className="font-bold text-indigo-600 dark:text-indigo-400 shrink-0">
-                            {idx + 1}.
-                          </span>
-                          <span className="leading-relaxed whitespace-pre-wrap">{item}</span>
-                        </div>
-                        <button
-                          onClick={() => {
-                            copyToClipboard(item);
-                            onShowToast('Copied item!', 'info');
-                          }}
-                          className="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-all shrink-0"
-                          title="Copy this single item"
+                {(() => {
+                  const currentTheme = TOOL_THEMES[resultTheme] || TOOL_THEMES.indigo;
+                  return result.items && result.items.length > 0 ? (
+                    <div className="space-y-2.5 max-h-[500px] overflow-y-auto pr-1">
+                      {result.items.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className={`p-3.5 rounded-xl border text-xs sm:text-[13px] flex items-start justify-between gap-3 group transition-all shadow-xs ${currentTheme.itemBg} ${currentTheme.hoverBorder} ${currentTheme.textColor}`}
                         >
-                          <Copy className="w-3 h-3" />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-850/60 border border-slate-100 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed whitespace-pre-wrap">
-                    {result.content}
-                  </div>
-                )}
+                          <div className="flex items-start gap-2.5 flex-1">
+                            <span
+                              className={`px-2 py-0.5 rounded-md text-[11px] font-black shrink-0 ${currentTheme.badgeBg}`}
+                            >
+                              {idx + 1}
+                            </span>
+                            <span className="leading-relaxed whitespace-pre-wrap font-medium flex-1">
+                              {item}
+                            </span>
+                          </div>
+                          <button
+                            onClick={() => {
+                              copyToClipboard(item);
+                              onShowToast('Copied item!', 'info');
+                            }}
+                            className="opacity-70 group-hover:opacity-100 p-1.5 rounded-lg hover:bg-slate-200/80 dark:hover:bg-slate-700 text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-all shrink-0 cursor-pointer"
+                            title="Copy this single item"
+                          >
+                            <Copy className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div
+                      className={`p-4 rounded-xl border text-xs sm:text-sm leading-relaxed whitespace-pre-wrap font-medium shadow-xs ${currentTheme.itemBg} ${currentTheme.textColor}`}
+                    >
+                      {result.content}
+                    </div>
+                  );
+                })()}
               </div>
             ) : (
               <div className="m-auto text-center py-16 px-4">

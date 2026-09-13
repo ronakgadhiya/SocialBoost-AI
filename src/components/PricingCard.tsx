@@ -4,12 +4,14 @@ export interface PricingPlan {
   id: string;
   name: string;
   price: string;
+  priceNumeric: number;
   period: string;
   description: string;
   features: string[];
   popular?: boolean;
   buttonText: string;
   isFree?: boolean;
+  maxGenerations: number;
 }
 
 export const PRICING_PLANS: PricingPlan[] = [
@@ -17,6 +19,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     id: 'free',
     name: 'Free',
     price: '₹0',
+    priceNumeric: 0,
     period: 'forever',
     description: 'Perfect for small local sellers testing social marketing.',
     features: [
@@ -28,11 +31,13 @@ export const PRICING_PLANS: PricingPlan[] = [
     ],
     buttonText: 'Current Plan',
     isFree: true,
+    maxGenerations: 5,
   },
   {
     id: 'pro',
     name: 'Pro',
     price: '₹299',
+    priceNumeric: 299,
     period: 'per month',
     description: 'Designed for growing brands & active store owners.',
     popular: true,
@@ -45,11 +50,13 @@ export const PRICING_PLANS: PricingPlan[] = [
       'Faster response times',
     ],
     buttonText: 'Upgrade to Pro',
+    maxGenerations: 100,
   },
   {
     id: 'business',
     name: 'Business',
     price: '₹799',
+    priceNumeric: 799,
     period: 'per month',
     description: 'For growing e-commerce stores & multi-product brands.',
     features: [
@@ -61,11 +68,13 @@ export const PRICING_PLANS: PricingPlan[] = [
       'Dedicated email support',
     ],
     buttonText: 'Upgrade to Business',
+    maxGenerations: 500,
   },
   {
     id: 'agency',
     name: 'Agency',
     price: '₹1,999',
+    priceNumeric: 1999,
     period: 'per month',
     description: 'For marketing agencies & freelance social managers.',
     features: [
@@ -77,6 +86,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       'Dedicated account manager',
     ],
     buttonText: 'Upgrade to Agency',
+    maxGenerations: 9999,
   },
 ];
 
@@ -128,17 +138,18 @@ export function PricingCard({ plan, onSelectPlan, isCurrent = false }: PricingCa
 
       <button
         id={`plan-btn-${plan.id}`}
-        onClick={() => onSelectPlan(plan)}
+        disabled={isCurrent}
+        onClick={() => !isCurrent && onSelectPlan(plan)}
         className={`w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all ${
-          plan.isFree || isCurrent
-            ? 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 cursor-default'
+          isCurrent
+            ? 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 cursor-default'
             : plan.popular
-            ? 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/20'
-            : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100'
+            ? 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/20 cursor-pointer'
+            : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 cursor-pointer'
         }`}
       >
-        <span>{plan.buttonText}</span>
-        {!plan.isFree && !isCurrent && <ArrowRight className="w-4 h-4" />}
+        <span>{isCurrent ? 'Current Plan' : plan.buttonText}</span>
+        {!isCurrent && <ArrowRight className="w-4 h-4" />}
       </button>
     </div>
   );

@@ -14,8 +14,8 @@ import { DEMO_BUSINESS } from './data/demoData';
 import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
 import { ToastContainer, ToastMessage } from './components/Toast';
-import { Modal } from './components/Modal';
 import { PRICING_PLANS, PricingPlan } from './components/PricingCard';
+import { PaymentCheckoutModal } from './components/PaymentCheckoutModal';
 
 // Pages
 import { LandingPage } from './pages/LandingPage';
@@ -214,61 +214,17 @@ export default function App() {
         )}
       </div>
 
-      {/* Global Upgrade Modal */}
+      {/* Global Payment Checkout Modal */}
       {upgradeModalPlan && (
-        <Modal
-          id="global-upgrade-modal"
+        <PaymentCheckoutModal
+          plan={upgradeModalPlan}
           isOpen={!!upgradeModalPlan}
           onClose={() => setUpgradeModalPlan(null)}
-          title={`Upgrade to ${upgradeModalPlan.name}`}
-          maxWidth="md"
-        >
-          <div className="space-y-4 text-center py-2">
-            <div className="w-12 h-12 rounded-2xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mx-auto">
-              <span className="text-xl font-black">⚡</span>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-extrabold text-slate-900 dark:text-white">
-                {upgradeModalPlan.name} Plan — {upgradeModalPlan.price}/{upgradeModalPlan.period}
-              </h4>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                {upgradeModalPlan.description}
-              </p>
-            </div>
-
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 text-left text-xs space-y-2 text-slate-600 dark:text-slate-300">
-              <span className="font-bold text-slate-900 dark:text-white block uppercase text-[10px]">
-                Plan Features:
-              </span>
-              {upgradeModalPlan.features.map((f, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <span className="text-emerald-500 font-bold">✓</span>
-                  <span>{f}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 text-xs text-indigo-900 dark:text-indigo-300 font-semibold">
-              Payment integration coming soon.
-            </div>
-
-            <p className="text-[11px] text-slate-400 leading-normal">
-              Payment integrations for online checkouts will be available in the upcoming release. In the meantime, you can test and reset your free generations in Settings.
-            </p>
-
-            <button
-              id="global-upgrade-close-btn"
-              onClick={() => {
-                setUpgradeModalPlan(null);
-                showToast('Payment integration coming soon.', 'info');
-              }}
-              className="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition-all"
-            >
-              Understood
-            </button>
-          </div>
-        </Modal>
+          onSuccess={(receipt) => {
+            refreshAppData();
+            showToast(`🎉 Upgraded to ${receipt.planName} Plan! ${receipt.planId === 'agency' ? 'Unlimited' : upgradeModalPlan.maxGenerations} generations available.`, 'success');
+          }}
+        />
       )}
 
       {/* Global Toast Notifications */}

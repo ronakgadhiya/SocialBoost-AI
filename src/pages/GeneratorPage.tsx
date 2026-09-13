@@ -378,7 +378,7 @@ export function GeneratorPage({
                 setBusinessName(e.target.value);
                 if (formErrors.businessName) setFormErrors((p) => ({ ...p, businessName: '' }));
               }}
-              className={`w-full px-3.5 py-2.5 rounded-xl text-sm border bg-slate-50 dark:bg-slate-800 focus:bg-white focus:outline-none transition-colors ${
+              className={`w-full px-3.5 py-2.5 rounded-xl text-sm border bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none transition-colors ${
                 formErrors.businessName
                   ? 'border-rose-500 ring-1 ring-rose-500'
                   : 'border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500'
@@ -399,7 +399,7 @@ export function GeneratorPage({
               placeholder="e.g. Streetwear Clothing & Apparel"
               value={businessType}
               onChange={(e) => setBusinessType(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             />
           </div>
         </div>
@@ -418,7 +418,7 @@ export function GeneratorPage({
                 setProductService(e.target.value);
                 if (formErrors.productService) setFormErrors((p) => ({ ...p, productService: '' }));
               }}
-              className={`w-full px-3.5 py-2.5 rounded-xl text-sm border bg-slate-50 dark:bg-slate-800 focus:bg-white focus:outline-none transition-colors ${
+              className={`w-full px-3.5 py-2.5 rounded-xl text-sm border bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none transition-colors ${
                 formErrors.productService
                   ? 'border-rose-500 ring-1 ring-rose-500'
                   : 'border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500'
@@ -442,7 +442,7 @@ export function GeneratorPage({
                 setTargetAudience(e.target.value);
                 if (formErrors.targetAudience) setFormErrors((p) => ({ ...p, targetAudience: '' }));
               }}
-              className={`w-full px-3.5 py-2.5 rounded-xl text-sm border bg-slate-50 dark:bg-slate-800 focus:bg-white focus:outline-none transition-colors ${
+              className={`w-full px-3.5 py-2.5 rounded-xl text-sm border bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:outline-none transition-colors ${
                 formErrors.targetAudience
                   ? 'border-rose-500 ring-1 ring-rose-500'
                   : 'border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500'
@@ -464,7 +464,7 @@ export function GeneratorPage({
             placeholder="Tell us what makes your offering special or the background story..."
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+            className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
           />
         </div>
 
@@ -479,7 +479,7 @@ export function GeneratorPage({
               placeholder="e.g. Mumbai, India"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             />
           </div>
 
@@ -493,7 +493,7 @@ export function GeneratorPage({
               placeholder="e.g. Flat 15% OFF with code ROVIQ15"
               value={offer}
               onChange={(e) => setOffer(e.target.value)}
-              className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             />
           </div>
 
@@ -507,7 +507,7 @@ export function GeneratorPage({
               placeholder="e.g. Starting from ₹599"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             />
           </div>
         </div>
@@ -522,7 +522,7 @@ export function GeneratorPage({
             placeholder="e.g. 100% combed cotton, zero color fading, pre-shrunk fabric"
             value={usp}
             onChange={(e) => setUsp(e.target.value)}
-            className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+            className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
           />
         </div>
       </div>
@@ -604,7 +604,7 @@ export function GeneratorPage({
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     isSelected
                       ? 'bg-violet-600 text-white font-bold'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-750'
                   }`}
                 >
                   {goal}
@@ -630,10 +630,10 @@ export function GeneratorPage({
               id="select-language"
               value={language}
               onChange={(e) => setLanguage(e.target.value as Language)}
-              className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             >
               {LANGUAGES.map((l) => (
-                <option key={l} value={l}>
+                <option key={l} value={l} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">
                   {l}
                 </option>
               ))}
@@ -648,10 +648,10 @@ export function GeneratorPage({
               id="select-tone"
               value={tone}
               onChange={(e) => setTone(e.target.value as Tone)}
-              className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             >
               {TONES.map((t) => (
-                <option key={t} value={t}>
+                <option key={t} value={t} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">
                   {t}
                 </option>
               ))}
@@ -674,7 +674,7 @@ export function GeneratorPage({
                   className={`flex-1 py-1.5 text-xs font-semibold rounded-lg border transition-all ${
                     length === len
                       ? 'bg-indigo-600 text-white border-indigo-600'
-                      : 'border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100'
+                      : 'border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                   }`}
                 >
                   {len}
@@ -697,7 +697,7 @@ export function GeneratorPage({
                   className={`flex-1 py-1.5 text-xs font-semibold rounded-lg border transition-all ${
                     emojiLevel === em
                       ? 'bg-indigo-600 text-white border-indigo-600'
-                      : 'border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100'
+                      : 'border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                   }`}
                 >
                   {em}
@@ -717,10 +717,10 @@ export function GeneratorPage({
                 const val = e.target.value;
                 setHashtagCount(val === 'None' ? 'None' : val === 'AI Optimized' ? 'AI Optimized' : Number(val) as any);
               }}
-              className="w-full px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             >
               {HASHTAG_OPTIONS.map((opt) => (
-                <option key={opt} value={opt}>
+                <option key={opt} value={opt} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">
                   {typeof opt === 'number' ? `${opt} Hashtags` : opt}
                 </option>
               ))}

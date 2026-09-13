@@ -106,13 +106,13 @@ export function DashboardHome({
         {/* Metric 1: Usage */}
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Free Quota Remaining</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Free Quota Remaining</span>
             <div className="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">
-              {remainingGenerations} <span className="text-xs font-normal text-slate-500">/ {usage.maxFree}</span>
+              {remainingGenerations} <span className="text-xs font-normal text-slate-500 dark:text-slate-400">/ {usage.maxFree}</span>
             </div>
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-            <span className="text-slate-500">Resets monthly</span>
+            <span className="text-slate-500 dark:text-slate-400">Resets monthly</span>
             <button onClick={onUpgradeClick} className="font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
               Upgrade
             </button>
@@ -122,13 +122,13 @@ export function DashboardHome({
         {/* Metric 2: Saved Content */}
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Saved History</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Saved History</span>
             <div className="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">
-              {history.length} <span className="text-xs font-normal text-slate-500">posts</span>
+              {history.length} <span className="text-xs font-normal text-slate-500 dark:text-slate-400">posts</span>
             </div>
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-            <span className="text-slate-500">Stored locally</span>
+            <span className="text-slate-500 dark:text-slate-400">Stored locally</span>
             <button onClick={() => onNavigate('history')} className="font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
               View all
             </button>
@@ -138,7 +138,7 @@ export function DashboardHome({
         {/* Metric 3: Brand Profile Status */}
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Brand Profile</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Brand Profile</span>
             <div className="text-sm font-bold text-slate-900 dark:text-white mt-1 flex items-center gap-2">
               {brandProfile ? (
                 <>
@@ -148,13 +148,13 @@ export function DashboardHome({
               ) : (
                 <>
                   <span className="w-2 h-2 rounded-full bg-amber-500" />
-                  <span className="text-slate-500 font-normal">Not configured</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-normal">Not configured</span>
                 </>
               )}
             </div>
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-            <span className="text-slate-500">{brandProfile ? brandProfile.businessType : 'Speed up generation'}</span>
+            <span className="text-slate-500 dark:text-slate-400">{brandProfile ? brandProfile.businessType : 'Speed up generation'}</span>
             <button onClick={() => onNavigate('brand')} className="font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
               {brandProfile ? 'Edit' : 'Setup'}
             </button>
@@ -164,13 +164,13 @@ export function DashboardHome({
         {/* Metric 4: Calendar Status */}
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Content Calendar</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Content Calendar</span>
             <div className="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">
               {calendar ? `${calendar.items.length} Days` : '0 Days'}
             </div>
           </div>
           <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-            <span className="text-slate-500">{calendar ? 'Active plan' : 'Plan your week'}</span>
+            <span className="text-slate-500 dark:text-slate-400">{calendar ? 'Active plan' : 'Plan your week'}</span>
             <button onClick={() => onNavigate('calendar')} className="font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
               {calendar ? 'Open' : 'Create'}
             </button>

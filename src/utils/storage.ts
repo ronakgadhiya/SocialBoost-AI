@@ -3,15 +3,20 @@ import {
   GenerationHistoryItem,
   CalendarPlan,
   UsageData,
+  UserSubscription,
+  PaymentReceipt,
 } from '../types';
 
-const STORAGE_KEYS = {
+export type { UserSubscription, PaymentReceipt };
+
+export const STORAGE_KEYS = {
   BRAND_PROFILE: 'sb_brand_profile',
   GENERATIONS: 'sb_generations',
   CALENDAR: 'sb_calendar',
   USAGE: 'sb_usage',
   THEME: 'sb_theme',
   USER_SETTINGS: 'sb_settings',
+  SUBSCRIPTION: 'sb_subscription',
 } as const;
 
 const MAX_HISTORY_ITEMS = 20;
@@ -118,27 +123,72 @@ export function deleteCalendar(): void {
   }
 }
 
-// Usage Limits (5 generations per month for free tier)
+// Subscription Management
+export function getSubscription(): UserSubscription {
+  const defaultSub: UserSubscription = {
+    planId: 'free',
+    planName: 'Free',
+    maxGenerations: MAX_FREE_GENERATIONS,
+    activatedAt: Date.now(),
+    expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
+  };
+  return safeParse<UserSubscription>(STORAGE_KEYS.SUBSCRIPTION, defaultSub);
+}
+
+export function saveSubscription(sub: UserSubscription): boolean {
+  const ok = safeSet(STORAGE_KEYS.SUBSCRIPTION, sub);
+  if (ok) {
+    // Also sync the current usage maxFree with the new subscription tier
+    const usage = getUsage();
+    safeSet(STORAGE_KEYS.USAGE, {
+      ...usage,
+      maxFree: sub.maxGenerations,
+    });
+  }
+  return ok;
+}
+
+export function resetSubscriptionToFree(): UserSubscription {
+  const freeSub: UserSubscription = {
+    planId: 'free',
+    planName: 'Free',
+    maxGenerations: MAX_FREE_GENERATIONS,
+    activatedAt: Date.now(),
+    expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
+  };
+  saveSubscription(freeSub);
+  return freeSub;
+}
+
+// Usage Limits (dynamically bound to active subscription plan)
 export function getUsage(): UsageData {
+  const sub = getSubscription();
+  const allowedQuota = sub.maxGenerations || MAX_FREE_GENERATIONS;
   const now = new Date();
   const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
   const defaultUsage: UsageData = {
     count: 0,
-    maxFree: MAX_FREE_GENERATIONS,
+    maxFree: allowedQuota,
     lastResetMonth: currentMonth,
   };
 
   const usage = safeParse<UsageData>(STORAGE_KEYS.USAGE, defaultUsage);
 
-  // Reset if month changed
+  // Reset if month changed or maxFree does not match active subscription
   if (usage.lastResetMonth !== currentMonth) {
     const resetUsage: UsageData = {
       count: 0,
-      maxFree: MAX_FREE_GENERATIONS,
+      maxFree: allowedQuota,
       lastResetMonth: currentMonth,
     };
     safeSet(STORAGE_KEYS.USAGE, resetUsage);
     return resetUsage;
+  }
+
+  // Ensure quota matches current subscription tier
+  if (usage.maxFree !== allowedQuota) {
+    usage.maxFree = allowedQuota;
+    safeSet(STORAGE_KEYS.USAGE, usage);
   }
 
   return usage;
@@ -158,11 +208,13 @@ export function incrementUsage(): { success: boolean; usage: UsageData } {
 }
 
 export function resetUsageForTesting(): UsageData {
+  const sub = getSubscription();
+  const allowedQuota = sub.maxGenerations || MAX_FREE_GENERATIONS;
   const now = new Date();
   const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
   const reset: UsageData = {
     count: 0,
-    maxFree: MAX_FREE_GENERATIONS,
+    maxFree: allowedQuota,
     lastResetMonth: currentMonth,
   };
   safeSet(STORAGE_KEYS.USAGE, reset);

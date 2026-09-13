@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Copy,
   Edit3,
@@ -14,9 +14,87 @@ import {
   Save,
   X,
   Layers,
+  Palette,
 } from 'lucide-react';
 import { GenerationResponse, ContentVariation } from '../types';
 import { copyToClipboard, downloadAsTxt, downloadAsJson, formatResultForTxt } from '../utils/export';
+
+export type CaptionColorTheme = 'blue' | 'indigo' | 'emerald' | 'purple' | 'amber' | 'neutral';
+
+export const CAPTION_THEMES: Record<
+  CaptionColorTheme,
+  {
+    name: string;
+    labelColor: string;
+    badgeBg: string;
+    containerBg: string;
+    borderColor: string;
+    textColor: string;
+    dotBg: string;
+    textareaBg: string;
+  }
+> = {
+  blue: {
+    name: 'Ocean Blue',
+    labelColor: 'text-blue-600 dark:text-blue-400',
+    badgeBg: 'bg-blue-100/80 dark:bg-blue-900/60 text-blue-800 dark:text-blue-200 border-blue-200 dark:border-blue-700/60',
+    containerBg: 'bg-blue-50/70 dark:bg-blue-950/30',
+    borderColor: 'border-blue-200 dark:border-blue-800/60',
+    textColor: 'text-blue-950 dark:text-blue-50',
+    dotBg: 'bg-blue-500',
+    textareaBg: 'bg-blue-50/40 dark:bg-blue-950/40 text-blue-950 dark:text-blue-50 border-blue-300 dark:border-blue-700',
+  },
+  indigo: {
+    name: 'Royal Indigo',
+    labelColor: 'text-indigo-600 dark:text-indigo-400',
+    badgeBg: 'bg-indigo-100/80 dark:bg-indigo-900/60 text-indigo-800 dark:text-indigo-200 border-indigo-200 dark:border-indigo-700/60',
+    containerBg: 'bg-indigo-50/60 dark:bg-indigo-950/30',
+    borderColor: 'border-indigo-200 dark:border-indigo-800/60',
+    textColor: 'text-indigo-950 dark:text-indigo-50',
+    dotBg: 'bg-indigo-500',
+    textareaBg: 'bg-indigo-50/40 dark:bg-indigo-950/40 text-indigo-950 dark:text-indigo-50 border-indigo-300 dark:border-indigo-700',
+  },
+  emerald: {
+    name: 'Fresh Emerald',
+    labelColor: 'text-emerald-600 dark:text-emerald-400',
+    badgeBg: 'bg-emerald-100/80 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-200 border-emerald-200 dark:border-emerald-700/60',
+    containerBg: 'bg-emerald-50/60 dark:bg-emerald-950/30',
+    borderColor: 'border-emerald-200 dark:border-emerald-800/60',
+    textColor: 'text-emerald-950 dark:text-emerald-50',
+    dotBg: 'bg-emerald-500',
+    textareaBg: 'bg-emerald-50/40 dark:bg-emerald-950/40 text-emerald-950 dark:text-emerald-50 border-emerald-300 dark:border-emerald-700',
+  },
+  purple: {
+    name: 'Vibrant Purple',
+    labelColor: 'text-purple-600 dark:text-purple-400',
+    badgeBg: 'bg-purple-100/80 dark:bg-purple-900/60 text-purple-800 dark:text-purple-200 border-purple-200 dark:border-purple-700/60',
+    containerBg: 'bg-purple-50/60 dark:bg-purple-950/30',
+    borderColor: 'border-purple-200 dark:border-purple-800/60',
+    textColor: 'text-purple-950 dark:text-purple-50',
+    dotBg: 'bg-purple-500',
+    textareaBg: 'bg-purple-50/40 dark:bg-purple-950/40 text-purple-950 dark:text-purple-50 border-purple-300 dark:border-purple-700',
+  },
+  amber: {
+    name: 'Warm Amber',
+    labelColor: 'text-amber-700 dark:text-amber-400',
+    badgeBg: 'bg-amber-100/80 dark:bg-amber-900/60 text-amber-900 dark:text-amber-200 border-amber-200 dark:border-amber-700/60',
+    containerBg: 'bg-amber-50/60 dark:bg-amber-950/30',
+    borderColor: 'border-amber-200 dark:border-amber-800/60',
+    textColor: 'text-amber-950 dark:text-amber-50',
+    dotBg: 'bg-amber-500',
+    textareaBg: 'bg-amber-50/40 dark:bg-amber-950/40 text-amber-950 dark:text-amber-50 border-amber-300 dark:border-amber-700',
+  },
+  neutral: {
+    name: 'Slate Classic',
+    labelColor: 'text-slate-700 dark:text-slate-300',
+    badgeBg: 'bg-slate-200/80 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700',
+    containerBg: 'bg-slate-50 dark:bg-slate-850/70',
+    borderColor: 'border-slate-200 dark:border-slate-800',
+    textColor: 'text-slate-900 dark:text-slate-100',
+    dotBg: 'bg-slate-500',
+    textareaBg: 'bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700',
+  },
+};
 
 interface ContentResultProps {
   result: GenerationResponse;
@@ -46,6 +124,21 @@ export function ContentResult({
   const [showExportMenu, setShowExportMenu] = useState(false);
   const [copied, setCopied] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [captionTheme, setCaptionTheme] = useState<CaptionColorTheme>(() => {
+    const saved = localStorage.getItem('sb_caption_theme');
+    if (saved && saved in CAPTION_THEMES) {
+      return saved as CaptionColorTheme;
+    }
+    return 'blue';
+  });
+
+  const activeTheme = CAPTION_THEMES[captionTheme] || CAPTION_THEMES.blue;
+
+  const handleSelectTheme = (newTheme: CaptionColorTheme) => {
+    setCaptionTheme(newTheme);
+    localStorage.setItem('sb_caption_theme', newTheme);
+    onShowToast(`Caption theme changed to ${CAPTION_THEMES[newTheme].name}`, 'info');
+  };
 
   // Active variation or default
   const variations = result.variations && result.variations.length > 0
@@ -360,15 +453,20 @@ export function ContentResult({
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
-                Main Content / Caption
-              </label>
+              <div className="flex items-center justify-between mb-1">
+                <label className={`block text-xs font-bold uppercase tracking-wider ${activeTheme.labelColor}`}>
+                  Main Content / Caption
+                </label>
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded border ${activeTheme.badgeBg}`}>
+                  {activeTheme.name}
+                </span>
+              </div>
               <textarea
                 id="edit-content-input"
                 value={editedContent}
                 onChange={(e) => setEditedContent(e.target.value)}
                 rows={8}
-                className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className={`w-full p-3.5 rounded-xl border ${activeTheme.textareaBg} text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors`}
               />
             </div>
 
@@ -414,10 +512,53 @@ export function ContentResult({
 
             {/* MAIN CONTENT / CAPTION Section */}
             <div id="result-caption-section" className="space-y-2">
-              <div className="text-xs font-bold tracking-wider uppercase text-slate-400 dark:text-slate-500">
-                {result.contentType.toUpperCase()} / CAPTION
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <div className={`text-xs font-bold tracking-wider uppercase flex items-center gap-1.5 ${activeTheme.labelColor}`}>
+                    <FileText className="w-3.5 h-3.5" />
+                    <span>{result.contentType.toUpperCase()} / CAPTION</span>
+                  </div>
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold border transition-colors ${activeTheme.badgeBg}`}>
+                    {activeTheme.name}
+                  </span>
+                </div>
+
+                {/* Interactive Caption Color Changer */}
+                <div
+                  id="caption-color-picker"
+                  className="flex items-center gap-1.5 bg-white dark:bg-slate-900 px-2 py-1 rounded-lg border border-slate-200/90 dark:border-slate-800 shadow-xs"
+                >
+                  <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1 mr-0.5">
+                    <Palette className="w-3.5 h-3.5" />
+                    <span>Color:</span>
+                  </span>
+                  {(Object.keys(CAPTION_THEMES) as CaptionColorTheme[]).map((themeKey) => {
+                    const t = CAPTION_THEMES[themeKey];
+                    const isSelected = captionTheme === themeKey;
+                    return (
+                      <button
+                        key={themeKey}
+                        type="button"
+                        onClick={() => handleSelectTheme(themeKey)}
+                        title={`Switch caption to ${t.name}`}
+                        className={`w-5 h-5 rounded-full ${t.dotBg} transition-all flex items-center justify-center cursor-pointer ${
+                          isSelected
+                            ? 'ring-2 ring-offset-1 ring-slate-800 dark:ring-white scale-110 shadow-xs'
+                            : 'opacity-70 hover:opacity-100 hover:scale-105'
+                        }`}
+                      >
+                        {isSelected && <Check className="w-3 h-3 text-white stroke-[3]" />}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-              <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-850/50 border border-slate-200/80 dark:border-slate-800 text-sm sm:text-base leading-relaxed text-slate-800 dark:text-slate-200 whitespace-pre-wrap">
+
+              {/* Themed Caption Content Box */}
+              <div
+                id="result-caption-content"
+                className={`p-5 rounded-xl border ${activeTheme.containerBg} ${activeTheme.borderColor} ${activeTheme.textColor} text-sm sm:text-base leading-relaxed whitespace-pre-wrap transition-colors duration-200 shadow-xs font-medium`}
+              >
                 {currentVariation.content || result.content}
               </div>
             </div>

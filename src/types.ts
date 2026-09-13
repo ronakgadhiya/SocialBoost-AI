@@ -73,6 +73,8 @@ export interface BusinessProfile {
   offer?: string;
   price?: string;
   website?: string;
+  contactEmail?: string;
+  contactPhone?: string;
   instagram?: string;
   facebook?: string;
   linkedin?: string;
@@ -218,3 +220,42 @@ export type ActiveTab =
   | 'brand'
   | 'pricing'
   | 'settings';
+
+export interface PricingPlan {
+  id: 'free' | 'pro' | 'business' | 'agency';
+  name: string;
+  price: string;
+  priceNumeric: number;
+  period: string;
+  description: string;
+  popular?: boolean;
+  features: string[];
+  maxGenerations: number;
+}
+
+export interface PaymentReceipt {
+  paymentId: string;
+  orderId: string;
+  planId: 'pro' | 'business' | 'agency';
+  planName: string;
+  amount: number;
+  taxAmount: number;
+  totalAmount: number;
+  currency: string;
+  paymentMethod: 'upi' | 'card' | 'netbanking' | 'simulator';
+  paymentDetails: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone?: string;
+  timestamp: number;
+  status: 'completed' | 'failed';
+}
+
+export interface UserSubscription {
+  planId: 'free' | 'pro' | 'business' | 'agency';
+  planName: string;
+  maxGenerations: number;
+  activatedAt: number;
+  expiresAt: number;
+  activeReceipt?: PaymentReceipt;
+}

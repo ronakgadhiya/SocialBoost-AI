@@ -150,7 +150,7 @@ export function BrandProfilePage({ onProfileSaved, onShowToast }: BrandProfilePa
                 placeholder="e.g. Roviq Design Store"
                 value={formData.businessName}
                 onChange={(e) => handleChange('businessName', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
               />
             </div>
 
@@ -164,7 +164,7 @@ export function BrandProfilePage({ onProfileSaved, onShowToast }: BrandProfilePa
                 placeholder="e.g. Fashion & Streetwear, Cafe, Bakery"
                 value={formData.businessType}
                 onChange={(e) => handleChange('businessType', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
               />
             </div>
           </div>
@@ -181,7 +181,7 @@ export function BrandProfilePage({ onProfileSaved, onShowToast }: BrandProfilePa
                 placeholder="e.g. Customized 240 GSM Graphic T-Shirts"
                 value={formData.productService}
                 onChange={(e) => handleChange('productService', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
               />
             </div>
 
@@ -195,7 +195,7 @@ export function BrandProfilePage({ onProfileSaved, onShowToast }: BrandProfilePa
                 placeholder="e.g. Students and Young Adults (Ages 18-28)"
                 value={formData.targetAudience}
                 onChange={(e) => handleChange('targetAudience', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
               />
             </div>
           </div>
@@ -210,7 +210,7 @@ export function BrandProfilePage({ onProfileSaved, onShowToast }: BrandProfilePa
               placeholder="Explain what your brand stands for, what sets you apart, and your core mission..."
               value={formData.description}
               onChange={(e) => handleChange('description', e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             />
           </div>
         </div>
@@ -232,7 +232,7 @@ export function BrandProfilePage({ onProfileSaved, onShowToast }: BrandProfilePa
                 placeholder="e.g. Mumbai, India or Worldwide"
                 value={formData.location}
                 onChange={(e) => handleChange('location', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
               />
             </div>
 
@@ -246,7 +246,7 @@ export function BrandProfilePage({ onProfileSaved, onShowToast }: BrandProfilePa
                 placeholder="e.g. 100% bio-washed cotton, fade-proof prints, free returns"
                 value={formData.usp}
                 onChange={(e) => handleChange('usp', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
               />
             </div>
           </div>
@@ -262,7 +262,7 @@ export function BrandProfilePage({ onProfileSaved, onShowToast }: BrandProfilePa
                 placeholder="e.g. Flat 15% OFF on first order"
                 value={formData.offer || ''}
                 onChange={(e) => handleChange('offer', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
               />
             </div>
 
@@ -276,7 +276,7 @@ export function BrandProfilePage({ onProfileSaved, onShowToast }: BrandProfilePa
                 placeholder="e.g. Starting from ₹499"
                 value={formData.price || ''}
                 onChange={(e) => handleChange('price', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
               />
             </div>
           </div>
@@ -300,7 +300,7 @@ export function BrandProfilePage({ onProfileSaved, onShowToast }: BrandProfilePa
                 placeholder="https://yourstore.com"
                 value={formData.website || ''}
                 onChange={(e) => handleChange('website', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
               />
             </div>
 
@@ -315,7 +315,7 @@ export function BrandProfilePage({ onProfileSaved, onShowToast }: BrandProfilePa
                 placeholder="@yourbrand"
                 value={formData.instagram || ''}
                 onChange={(e) => handleChange('instagram', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
               />
             </div>
           </div>
@@ -329,10 +329,10 @@ export function BrandProfilePage({ onProfileSaved, onShowToast }: BrandProfilePa
                 id="brand-default-tone"
                 value={formData.defaultTone || 'Friendly'}
                 onChange={(e) => handleChange('defaultTone', e.target.value as Tone)}
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
               >
                 {TONES.map((t) => (
-                  <option key={t} value={t}>
+                  <option key={t} value={t} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">
                     {t}
                   </option>
                 ))}
@@ -347,10 +347,10 @@ export function BrandProfilePage({ onProfileSaved, onShowToast }: BrandProfilePa
                 id="brand-default-language"
                 value={formData.defaultLanguage || 'English'}
                 onChange={(e) => handleChange('defaultLanguage', e.target.value as Language)}
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl text-sm border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
               >
                 {LANGUAGES.map((l) => (
-                  <option key={l} value={l}>
+                  <option key={l} value={l} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100">
                     {l}
                   </option>
                 ))}

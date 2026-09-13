@@ -195,7 +195,7 @@ export function CalendarPage({
               value={businessName}
               onChange={(e) => setBusinessName(e.target.value)}
               placeholder="e.g. Roviq Design Store"
-              className="w-full px-3.5 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3.5 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             />
           </div>
 
@@ -209,7 +209,7 @@ export function CalendarPage({
               value={productService}
               onChange={(e) => setProductService(e.target.value)}
               placeholder="e.g. Oversized Graphic T-Shirts"
-              className="w-full px-3.5 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full px-3.5 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-colors"
             />
           </div>
 
@@ -280,7 +280,7 @@ export function CalendarPage({
                 className={`p-1.5 rounded-lg text-xs font-semibold ${
                   viewMode === 'grid'
                     ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
-                    : 'text-slate-500 hover:text-slate-900'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
                 title="Grid view"
               >
@@ -292,7 +292,7 @@ export function CalendarPage({
                 className={`p-1.5 rounded-lg text-xs font-semibold ${
                   viewMode === 'list'
                     ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
-                    : 'text-slate-500 hover:text-slate-900'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
                 title="List view"
               >
