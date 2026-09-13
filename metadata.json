@@ -1,0 +1,6 @@
+{
+  "name": "SocialBoost AI",
+  "description": "AI Marketing Assistant for Small Businesses. Generate captions, reels, ads, content ideas, hashtags and marketing campaigns tailored to your business.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
